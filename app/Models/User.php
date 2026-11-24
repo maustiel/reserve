@@ -23,7 +23,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['name', 'email', 'password' ,'phone', 'role', 'borrower_type', 'section_or_service'])]
+#[Fillable(['name', 'email', 'password', 'phone', 'role', 'borrower_type', 'section_or_service'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -47,6 +47,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Loan::class);
     }
+
     public function isManager(): bool
     {
         return $this->role === 'manager';

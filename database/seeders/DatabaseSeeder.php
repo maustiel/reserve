@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -62,7 +61,7 @@ class DatabaseSeeder extends Seeder
 
         // 2. Catégories (6 catégories propres)
         $cats = collect(['Portable', 'Caméra', 'Trépied', 'Arduino', 'Micro', 'Projecteur'])
-            ->mapWithKeys(fn($name) => [$name => Category::create(['name' => $name])->id]);
+            ->mapWithKeys(fn ($name) => [$name => Category::create(['name' => $name])->id]);
 
         // 3. Inventaire (extrait propre du tableur Excel)
         $items = [

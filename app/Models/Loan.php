@@ -23,14 +23,17 @@ class Loan extends Model
     {
         return $this->belongsTo(Equipment::class);
     }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function inspections()
     {
         return $this->hasMany(Inspection::class);
     }
+
     public function isOverdue(): bool
     {
         return $this->status === 'active' && $this->due_at->isPast();
