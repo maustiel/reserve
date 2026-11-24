@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Equipment extends Model
 {
@@ -10,17 +13,20 @@ class Equipment extends Model
 
     protected $fillable = ['inventory_code', 'category_id', 'name', 'condition', 'location', 'default_accessories', 'notes'];
 
-    public function category()
+    /** @return BelongsTo<Category, $this> */
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function loans()
+    /** @return HasMany<Loan, $this> */
+    public function loans(): HasMany
     {
         return $this->hasMany(Loan::class);
     }
 
-    public function openLoan()
+    /** @return HasOne<Loan, $this> */
+    public function openLoan(): HasOne
     {
         return $this->hasOne(Loan::class)->whereIn('status', ['requested', 'active']);
     }

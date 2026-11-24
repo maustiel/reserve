@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Loan extends Model
 {
@@ -19,23 +21,21 @@ class Loan extends Model
         ];
     }
 
-    public function equipment()
+    /** @return BelongsTo<Equipment, $this> */
+    public function equipment(): BelongsTo
     {
         return $this->belongsTo(Equipment::class);
     }
 
-    public function user()
+    /** @return BelongsTo<User, $this> */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function inspections()
+    /** @return HasMany<Inspection, $this> */
+    public function inspections(): HasMany
     {
         return $this->hasMany(Inspection::class);
-    }
-
-    public function isOverdue(): bool
-    {
-        return $this->status === 'active' && $this->due_at->isPast();
     }
 }
